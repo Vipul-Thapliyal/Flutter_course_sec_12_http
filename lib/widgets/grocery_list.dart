@@ -36,7 +36,7 @@ class _GroceryListState extends State<GroceryList> {
       });
     }
 
-    if(response.body == "null") { /// Response is in string of FireBase
+    if(response.body == "null") { /// Response is in data type string in FireBase
       setState(() {
         _isLoading = false;
       });
