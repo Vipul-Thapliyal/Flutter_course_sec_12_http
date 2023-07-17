@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:http_backend_section_12/data/categories.dart';
 import 'package:http_backend_section_12/models/category.dart';
+import 'package:http_backend_section_12/models/grocery_item.dart';
 
 class NewItem extends StatefulWidget {
   const NewItem({Key? key}) : super(key: key);
@@ -36,13 +37,19 @@ class _NewItemState extends State<NewItem> {
         }),
       );
 
-      print(response.body);
-      print(response.statusCode);
+      final Map<String, dynamic> resData = json.decode(response.body);
 
       if(!context.mounted) { // If current widget is not part of screen
         return;
       }
-      Navigator.of(context).pop(); // If current widget is still part of screen
+      Navigator.of(context).pop(
+        GroceryItem(
+          id: resData["name"],
+          name: _enteredName,
+          quantity: _enteredQuantity,
+          category: _selectedCategory
+        )
+      ); // If current widget is still part of screen
     }
   }
 
